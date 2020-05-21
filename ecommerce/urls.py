@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page),
     path('contact/', contact_page),
-    path('products/', include('productapp.urls')),
+    path('products/', include(('productapp.urls','productapp'), namespace='products')),
     # path('products/<pk>', ProductDetailView.as_view()),
 
     path('products/<slug>/', ProductDetailSlugView.as_view()),
@@ -44,7 +44,8 @@ urlpatterns = [
 
     path('login/', login_page),
     path('register/', register_page),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

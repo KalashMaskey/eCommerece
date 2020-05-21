@@ -1,0 +1,5 @@
+{% for listObj in object_list %}
+
+<a href="{{listObj.get_absolute_url}}">{{listObj.title}}</a> <br>
+
+{% endfor %}

@@ -1,0 +1,20 @@
+{% extends 'base.html'  %}
+
+{% block content%}
+
+{% include 'base/nav.html' with brand_name=brand_view %}
+    <div class="container">
+    <div class="row">
+    <div class="col">
+      <!-- <p>{{ title }}</p> -->
+      <!-- <p>{{ content }}</p> -->
+      <form method="POST">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit" name="btn btn-default">Submit</button>
+      </form>
+
+    </div>
+    </div>
+    </div>
+{% endblock %}

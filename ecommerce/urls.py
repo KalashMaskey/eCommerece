@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.views.generic import TemplateView
 from productapp.views import (
         ProductListView,
         ProductDetailView,
@@ -31,8 +31,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_page),
-    path('contact/', contact_page),
+    path('', home_page, name='home'),
+    path('contact/', contact_page, name='contact'),
     path('products/', include(('productapp.urls','productapp'), namespace='products')),
     # path('products/<pk>', ProductDetailView.as_view()),
 
@@ -42,8 +42,10 @@ urlpatterns = [
     # path('featured/', ProductFeaturedListView.as_view()),
     # path('featured/<pk>/', ProductFeaturedDetailView.as_view()),
 
-    path('login/', login_page),
-    path('register/', register_page),
+    path('login/', login_page, name='login'),
+    path('register/', register_page, name='register'),
+
+    path('bootstrap',TemplateView.as_view(template_name='bootstrap/example.html'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

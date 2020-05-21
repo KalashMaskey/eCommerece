@@ -1,4 +1,7 @@
+{% extends 'base.html' %}
 
-{{object.title}} <br>
-{{object.description}} <br>
+{% block content %}
+<h1>{{object.title}}</h1> <br>
+{{object.description|linebreaks}} <br>
 <img src="{{object.image.url}}" class="img-fluid" alt="{instance.title} Logo">
+{% endblock content %}

@@ -4,6 +4,7 @@ import random
 from django.db.models.signals import pre_save
 from .utils import unique_slug_generator
 from django.urls import reverse
+from django.utils.timezone import datetime
 
 # Create your models here.
 def get_filename_ext(filepath):
@@ -52,6 +53,7 @@ class Product(models.Model):
     featured    = models.BooleanField(default=False)
     active      = models.BooleanField(default=True)
     slug        = models.SlugField(blank=True,unique=True)
+    timestamp   = models.DateTimeField(auto_now_add=True)
 
     objects = ProductManager()
 

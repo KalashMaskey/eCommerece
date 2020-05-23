@@ -34,6 +34,8 @@ urlpatterns = [
     path('', home_page, name='home'),
     path('contact/', contact_page, name='contact'),
     path('products/', include(('productapp.urls','productapp'), namespace='products')),
+    path('search/', include(('search.urls','search'), namespace='search')),
+
     # path('products/<pk>', ProductDetailView.as_view()),
 
     path('products/<slug>/', ProductDetailSlugView.as_view()),

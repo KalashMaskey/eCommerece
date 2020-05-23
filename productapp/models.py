@@ -5,6 +5,7 @@ from django.db.models.signals import pre_save
 from .utils import unique_slug_generator
 from django.urls import reverse
 from django.utils.timezone import datetime
+from django.db.models import Q
 
 # Create your models here.
 def get_filename_ext(filepath):
@@ -27,6 +28,13 @@ class ProductQuerySet(models.query.QuerySet):
     def featured(self):
         return self.filter(featured=True, active=True)
 
+    def search(self,query):
+        lookups =(Q(title__icontains=query) |
+                  Q(description__icontains=query) |
+                  Q(price__icontains=query) |
+                  Q(tag__title__icontains=query))
+        # Q(tag)name_icontains=query)
+        return self.filter(lookups).distinct()
 
 class ProductManager(models.Manager):
 
@@ -44,6 +52,9 @@ class ProductManager(models.Manager):
         if qs.count() == 1:
             return qs.first()
         return None
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
 
 class Product(models.Model):
     title       = models.CharField(max_length=256)

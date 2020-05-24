@@ -28,6 +28,8 @@ from .views import contact_page, home_page, login_page, register_page
 
 from django.conf import settings
 from django.conf.urls.static import static
+from carts.views import cart_home
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,19 +37,14 @@ urlpatterns = [
     path('contact/', contact_page, name='contact'),
     path('products/', include(('productapp.urls','productapp'), namespace='products')),
     path('search/', include(('search.urls','search'), namespace='search')),
-
-    # path('products/<pk>', ProductDetailView.as_view()),
-
+    path('carts/',cart_home, name='carts'),
     path('products/<slug>/', ProductDetailSlugView.as_view()),
-    #
-    #
-    # path('featured/', ProductFeaturedListView.as_view()),
-    # path('featured/<pk>/', ProductFeaturedDetailView.as_view()),
-
     path('login/', login_page, name='login'),
     path('register/', register_page, name='register'),
-
     path('bootstrap',TemplateView.as_view(template_name='bootstrap/example.html'))
+    # path('products/<pk>', ProductDetailView.as_view()),
+    # path('featured/', ProductFeaturedListView.as_view()),
+    # path('featured/<pk>/', ProductFeaturedDetailView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

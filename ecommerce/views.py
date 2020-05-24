@@ -4,6 +4,8 @@ from .forms import ContactForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, get_user_model
 
 def home_page(request):
+    # print(request.session.get('cart_id'))
+    # request.session['cart_id']
     context = {
         "home": "Kindly Login",
         }

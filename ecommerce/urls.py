@@ -24,10 +24,14 @@ from productapp.views import (
         ProductDetailSlugView
         )
 
-from .views import contact_page, home_page, login_page, register_page
+from accounts.views import login_page, register_page
+from .views import contact_page, home_page
 
 from django.conf import settings
+
 from django.conf.urls.static import static
+
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
@@ -41,6 +45,7 @@ urlpatterns = [
     path('products/<slug>/', ProductDetailSlugView.as_view()),
     path('login/', login_page, name='login'),
     path('register/', register_page, name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('bootstrap',TemplateView.as_view(template_name='bootstrap/example.html'))
     # path('products/<pk>', ProductDetailView.as_view()),
     # path('featured/', ProductFeaturedListView.as_view()),
